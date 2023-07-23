@@ -1,6 +1,6 @@
 # Robot-2023
 
-## Mechanics path
+## Mechanical path
 
 Task 1: using TinkerCad base and tall were designed and other parts were merged and task ubdated in screenRobot Repo.
 
