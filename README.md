@@ -12,4 +12,6 @@ Task 1: arduino first used with 12 LEDs to design robot eye circuit, and with se
 
 Task 1: ROS and Gazeebo installed then roslaunch robot_arm and controlled using moveit_pkg, find task in catkin_ws Repo
 
-
+## IoT path
+## Web and NLP path
+## Industrial Engineering path
