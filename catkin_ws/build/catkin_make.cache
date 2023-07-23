@@ -1,0 +1,2 @@
+moveit_pkg:robot_arm_pkg
+-DCATKIN_DEVEL_PREFIX=/home/khalid/catkin_ws/devel -DCMAKE_INSTALL_PREFIX=/home/khalid/catkin_ws/install -DCATKIN_WHITELIST_PACKAGES=moveit_pkg;robot_arm_pkg -G Unix Makefiles
