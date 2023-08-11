@@ -1,0 +1,3 @@
+In this project I create html , js and css files to build directions keypad.
+
+process_buttons is used to control processes and logs to show clicks logs from keypad database using phpmyadmin.
