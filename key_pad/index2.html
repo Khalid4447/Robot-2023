@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Directional Keypad</title>
+<style>
+  #keypad {
+    text-align: center;
+  }
+  .btn {
+    display: inline-block;
+    margin: 10px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  #canvas {
+    border: 1px solid #000;
+    margin-top: 20px;
+  }
+</style>
+</head>
+<body>
+<div id="keypad">
+  <button class="btn" onclick="drawLine('forward')">Forward</button>
+  <button class="btn" onclick="drawLine('backward')">Backward</button>
+  <button class="btn" onclick="drawLine('left')">Left</button>
+  <button class="btn" onclick="drawLine('right')">Right</button>
+  <button class="btn" onclick="clearCanvas()">Stop</button>
+</div>
+<canvas id="canvas" width="400" height="300"></canvas>
+<script>
+  const canvas = document.getElementById('canvas');
+  const context = canvas.getContext('2d');
+  let lastX = canvas.width / 2;
+  let lastY = canvas.height / 2;
+  function recordMovement(direction, length) {
+    const xhr = new XMLHttpRequest();
+    xhr.open("POST", "record_movement.php", true);
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState === 4 && xhr.status === 200) {
+        console.log(xhr.responseText);
+      }
+    };
+    xhr.send(`direction=${direction}&length=${length}`);
+  }
+  function drawLine(direction) {
+    const step = 20;
+    let newX = lastX;
+    let newY = lastY;
+
+    context.beginPath();
+    context.moveTo(lastX, lastY);
+
+    if (direction === 'forward') {
+      newY -= step;
+    } else if (direction === 'backward') {
+      newY += step;
+    } else if (direction === 'left') {
+      newX -= step;
+    } else if (direction === 'right') {
+      newX += step;
+    }
+
+    context.lineTo(newX, newY);
+    context.stroke();
+
+    lastX = newX;
+    lastY = newY;
+    recordMovement(direction, step); // Send movement data to the PHP script
+  }
+
+  function clearCanvas() {
+    context.clearRect(0, 0, canvas.width, canvas.height);
+    lastX = canvas.width / 2;
+    lastY = canvas.height / 2;
+  }
+</script>
+</body>
+</html>
+
